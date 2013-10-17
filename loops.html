@@ -10,21 +10,34 @@
             font-family: 'Raleway', sans-serif;
             letter-spacing: 1px;
             font-size: 1.5em;
-            margin: 10px 25px;
-            width: 700px;
+            background-image: url('images/nautilus.jpg');
+        }
+        #container {
+            background-color: #fff;
+            opacity: 0.8;
+            width: 800px;
+            border-radius: 4px;
+        }
+        #content {
+            padding: 13px 19px;
+            margin: 9px 11px;
         }
     </style>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="js/loops.js"></script>
 </head>
 <body>
-    <h1>Fibs</h1>
-    <p>See also the console.</p>
+    <div id="container">
+        <div id="content">
+            <h1>Fibs</h1>
+            <p>See also the console.</p>
 
-    <h2>For Loop Version</h2>
-    <div id="forFibs"></div>
+            <h2>For Loop Version</h2>
+            <div id="forFibs"></div>
 
-    <h2>While Loop Version</h2>
-    <div id="whileFibs"></div>
+            <h2>While Loop Version</h2>
+            <div id="whileFibs"></div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="js/loops.js"></script>
 </body>
 </html>

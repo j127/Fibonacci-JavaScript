@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+    // Get input from user
     var getFibCount = function (question) {
         var minNumber = 1,
             maxNumber = 100;
@@ -13,16 +15,25 @@ $(document).ready(function() {
         return fibCount;
     }
 
-    // Initial prompt window
-    getFibCount("How many fibs? (between 3 and 100)");
-
     // Function to validate number
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    // Open the initial prompt window
+    $('button').on('click', function() {
+        // Clear current values
+        $('#output').hide();
+        $('#forFibs').html('');
+        $('#whileFibs').text('');
+        getFibCount("How many fibs? (between 3 and 100)");
+        fibForLoop(fibCount);
+        fibWhileLoop(fibCount);
+        $('#output').fadeIn();
+    });
+
     // For loop version
-    (function() {
+    function fibForLoop(fibCount) {
         var forFib = [0, 1],
             current;
 
@@ -31,15 +42,16 @@ $(document).ready(function() {
             forFib.push(current);
         }
 
+        console.log('Length of `for` array: ' + forFib.length);
         forFib = forFib.join(', ');
 
         // Send output
         console.log('For loop:\t\t' + forFib);
         $('#forFibs').append(forFib);
-    })();
+    };
 
     // While loop version
-    (function() {
+    function fibWhileLoop(fibCount) {
         var whileFib = [0, 1],
             current,
             i = 1;
@@ -50,11 +62,12 @@ $(document).ready(function() {
             i ++;
         }
 
+        console.log('Length of `while` array: ' + whileFib.length);
         whileFib = whileFib.join(', ');
 
         // Send output
         console.log('While loop:\t\t' + whileFib);
         $('#whileFibs').append(whileFib);
-    })();
+    };
 });
 

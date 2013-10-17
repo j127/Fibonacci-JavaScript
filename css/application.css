@@ -1,0 +1,17 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.1em;
+    background-image: url('../images/nautilus.jpg');
+}
+#container {
+    background-color: #fff;
+    opacity: 0.8;
+    width: 800px;
+    border-radius: 4px;
+    padding: 13px 19px 29px 19px;
+    margin: 9px 11px;
+}
+#output {
+    display: none;
+}

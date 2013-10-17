@@ -20,15 +20,17 @@ $(document).ready(function() {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    // Open the initial prompt window
+    // Button click functionality
     $('button').on('click', function() {
         // Clear current values
         $('#output').hide();
-        $('#forFibs').html('');
+        $('#forFibs').text('');
         $('#whileFibs').text('');
+        $('#tableOutput').html('');
         getFibCount("How many fibs? (between 3 and 100)");
         fibForLoop(fibCount);
         fibWhileLoop(fibCount);
+        assembleTable(fibArray);
         $('#output').fadeIn();
     });
 
@@ -43,11 +45,37 @@ $(document).ready(function() {
         }
 
         console.log('Length of `for` array: ' + forFib.length);
+        console.log('forFib: ' + forFib);
+        fibArray = forFib;
         forFib = forFib.join(', ');
 
         // Send output
         console.log('For loop:\t\t' + forFib);
         $('#forFibs').append(forFib);
+        return fibArray;
+    };
+
+    // Assemble table
+    function assembleTable(fibArray) {
+        var len = fibArray.length;
+        var tableStart = '<table>';
+        var tableEnd = '</table>';
+        var tableMiddle = '';
+
+        // Assemble table header
+        tableMiddle += '<tr>';
+        for(var i = 0; i < len; i ++) {
+            tableMiddle += '<th>F' + i + '</th>';
+        };
+        tableMiddle += '</tr>';
+
+        tableMiddle += '<tr>';
+        // Assemble table header
+        for(var i = 0; i < len; i ++) {
+            tableMiddle += '<td>' + fibArray[i] + '</td>';
+        };
+        tableMiddle += '</tr>';
+        $('#tableOutput').html(tableStart + tableMiddle + tableEnd);
     };
 
     // While loop version

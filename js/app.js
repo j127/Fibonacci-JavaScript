@@ -40,8 +40,7 @@ $(document).ready(function() {
         var radioButtonsValid = false,
             inputFieldValid = false;
 
-        // TODO: fix global variable?
-        fibCount = document.getElementById('numberOfValues').value;
+        var fibCount = document.getElementById('numberOfValues').value;
         var format = document.getElementsByName('outputFormat'); // an array
 
         // Validate input field
@@ -77,11 +76,11 @@ $(document).ready(function() {
         var forFib = [0],
             current;
 
-        if(fibCount > 1) {
+        if(num > 1) {
             forFib.push(1);
         };
 
-        for (var i = 1; i  <= fibCount - 2; i ++) {
+        for (var i = 1; i  <= num - 2; i ++) {
             current = forFib[i] + forFib[i - 1];
             forFib.push(current);
         }

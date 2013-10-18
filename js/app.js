@@ -1,5 +1,4 @@
-$(document).ready(function() {
-    // TODO: finish removing jQuery
+(function() {
 
     // Show the content after the page loads
     var loader = document.getElementById('loader');
@@ -17,9 +16,16 @@ $(document).ready(function() {
     max.innerHTML = maxFibNumber;
     max.style.color = 'black';
 
-    $('button').on('click', function(e) {
+    // Listen for button click
+    var fibBtn = document.getElementById('printFibValues');
+    fibBtn.addEventListener('click', function(e) {
         // Prevent form submission
         e.preventDefault();
+        btnClick();
+    });
+
+    function btnClick() {
+        console.log('Button clicked');
 
         // Clear current values
         document.getElementById('message').innerHTML = '';
@@ -27,13 +33,9 @@ $(document).ready(function() {
 
         // Do it
         getFibOptions();
-    });
+        console.log('-------');
 
-    // Validate numbers
-    // isNaN() by itself won't catch numbers passed as strings like '10' (with quotes)
-    function isNumber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
+    };
 
     // Get input from user
     function getFibOptions() {
@@ -44,7 +46,7 @@ $(document).ready(function() {
         var format = document.getElementsByName('outputFormat'); // an array
 
         // Validate input field
-        if((!isNumber(fibCount)) || (fibCount < minFibNumber) || (fibCount > maxFibNumber)) {
+        if((isNaN(fibCount)) || (fibCount < minFibNumber) || (fibCount > maxFibNumber)) {
             document.getElementById('message').innerHTML += 'You must enter a number between ' + minFibNumber + ' and ' + maxFibNumber + '.<br>';
         } else {
             inputFieldValid = true;
@@ -56,7 +58,7 @@ $(document).ready(function() {
                 radioButtonsValid = true;
                 console.log('radioButtonsValid = ' + radioButtonsValid);
                 printFormat = format[i].value;
-                console.log(format[i].value);
+                console.log('Format: ' + format[i].value);
             };
         };
 
@@ -132,5 +134,5 @@ $(document).ready(function() {
         document.getElementById('outputArea').innerHTML = '<h2>Your Fibs Table</h2>' + tableStart + tableMiddle + tableEnd;
     };
 
-});
+})();
 

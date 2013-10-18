@@ -1,41 +1,64 @@
 $(document).ready(function() {
 
-    // Get input from user
-    var getFibCount = function (question) {
-        var minNumber = 1,
-            maxNumber = 100;
+    $('button').on('click', function(e) {
+        // Prevent form submission
+        e.preventDefault();
 
-        // TODO: fix global variable?
-        fibCount = window.prompt(question);
+        // Clear current values
+        $('#message').html('');
+        $('#outputArea').text('');
 
-        // Validate input
-        if((!isNumber(fibCount)) || (fibCount < 3) || (fibCount > 100)) {
-            getFibCount("You must enter a number between 1 and 100.");
-        }
-        return fibCount;
-    }
+        // Do it
+        getFibOptions();
+    });
 
-    // Function to validate number
+    // Function to validate numbers
+    // isNaN() by itself won't catch numbers passes as strings like '10' (with quotes)
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    // Button click functionality
-    $('button').on('click', function() {
-        // Clear current values
-        $('#output').hide();
-        $('#forFibs').text('');
-        $('#whileFibs').text('');
-        $('#tableOutput').html('');
-        getFibCount("How many fibs? (between 3 and 100)");
-        fibForLoop(fibCount);
-        fibWhileLoop(fibCount);
-        assembleTable(fibArray);
-        $('#output').fadeIn();
-    });
+    // Function to get input from user
+    function getFibOptions() {
+        var minNumber = 3,
+            maxNumber = 30,
+            radioButtonsValid = false,
+            inputFieldValid = false;
 
-    // For loop version
-    function fibForLoop(fibCount) {
+        // TODO: fix global variable?
+        fibCount = document.getElementById('numberOfValues').value;
+        var format = document.getElementsByName('outputFormat'); // an array
+
+        // Validate input field
+        if((!isNumber(fibCount)) || (fibCount < minNumber) || (fibCount > maxNumber)) {
+            $('#message').append('You must enter a number between 3 and 30.<br>');
+        } else {
+            inputFieldValid = true;
+        };
+
+        // Validate radio buttons - loop through the array using cached length
+        for(var i = 0, len = format.length; i < len; i ++) {
+            if(format[i].checked) {
+                radioButtonsValid = true;
+                console.log('radioButtonsValid = ' + radioButtonsValid);
+                printFormat = format[i].value;
+                console.log(format[i].value);
+            };
+        };
+
+        if(radioButtonsValid === false) {
+            $('#message').append('You must choose a format.<br>');
+        };
+
+        // Generate the output
+        if((radioButtonsValid === true) && (inputFieldValid === true)) {
+            generateFibs(fibCount, printFormat);
+        };
+    }
+
+    // Function to generate and print data to screen
+    function generateFibs(num, format) {
+        // Generate the fibs
         var forFib = [0, 1],
             current;
 
@@ -47,55 +70,50 @@ $(document).ready(function() {
         console.log('Length of `for` array: ' + forFib.length);
         console.log('forFib: ' + forFib);
         fibArray = forFib;
-        forFib = forFib.join(', ');
 
-        // Send output
-        console.log('For loop:\t\t' + forFib);
-        $('#forFibs').append(forFib);
-        return fibArray;
+        // Check which format to output based on the input
+        if(format === 'console') {
+            fibsToConsole(fibArray);
+        } else if(format === 'table') {
+            fibsToTable(fibArray);
+        } else {
+            $('#message').html('There was an error with the formatting options.');
+        };
     };
 
-    // Assemble table
-    function assembleTable(fibArray) {
-        var len = fibArray.length;
+    // Function to print to console / screen
+    function fibsToConsole(fibs) {
+
+        // Send output to console
+        console.log('For loop:\t\t' + fibs);
+
+        // Send output to screen
+        fibs = fibs.join(', ');
+        $('#outputArea').append('<h2>Your Fibs String:</h2>' + fibs);
+    };
+
+    // Function to print a table
+    function fibsToTable(fibs) {
+        var fibsLen = fibs.length;
         var tableStart = '<table>';
         var tableEnd = '</table>';
         var tableMiddle = '';
 
         // Assemble table header
         tableMiddle += '<tr>';
-        for(var i = 0; i < len; i ++) {
+        for(var i = 0; i < fibsLen; i ++) {
             tableMiddle += '<th>F' + i + '</th>';
         };
         tableMiddle += '</tr>';
 
         tableMiddle += '<tr>';
         // Assemble table header
-        for(var i = 0; i < len; i ++) {
-            tableMiddle += '<td>' + fibArray[i] + '</td>';
+        for(var i = 0; i < fibsLen; i ++) {
+            tableMiddle += '<td>' + fibs[i] + '</td>';
         };
         tableMiddle += '</tr>';
-        $('#tableOutput').html(tableStart + tableMiddle + tableEnd);
+        $('#outputArea').html('<h2>Your Fibs Table</h2>' + tableStart + tableMiddle + tableEnd);
     };
 
-    // While loop version
-    function fibWhileLoop(fibCount) {
-        var whileFib = [0, 1],
-            current,
-            i = 1;
-
-        while(i <= fibCount - 2) {
-            current = whileFib[i] + whileFib[i - 1];
-            whileFib.push(current);
-            i ++;
-        }
-
-        console.log('Length of `while` array: ' + whileFib.length);
-        whileFib = whileFib.join(', ');
-
-        // Send output
-        console.log('While loop:\t\t' + whileFib);
-        $('#whileFibs').append(whileFib);
-    };
 });
 

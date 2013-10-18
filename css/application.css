@@ -2,23 +2,36 @@ body {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 1px;
     font-size: 1.1em;
-    /* background-image: url('../images/nautilus.jpg'); */
-    background-color: #1a3456;
+    background-image: url('../images/nautilus.jpg');
+    /* background-color: #1a3456; */
 }
 #container {
     background-color: #fff;
-    /* opacity: 0.9; */
+    opacity: 0.9;
     width: 90%;
     border-radius: 4px;
     padding: 13px 19px 29px 19px;
     margin: 9px 25px;
-}
-#output {
-    display: none;
+    min-height: 600px;
 }
 table, td, th {
     border: 1px solid #ccc;
 }
 td, th {
     padding: 5px;
+}
+#message {
+    color: #f00;
+}
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    opacity: 0.8;
+}
+footer a, footer a:visited {
+    color: #000;
 }

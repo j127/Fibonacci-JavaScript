@@ -30,7 +30,7 @@ $(document).ready(function() {
     });
 
     // Validate numbers
-    // isNaN() by itself won't catch numbers passes as strings like '10' (with quotes)
+    // isNaN() by itself won't catch numbers passed as strings like '10' (with quotes)
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }

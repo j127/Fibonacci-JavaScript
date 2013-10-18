@@ -19,6 +19,10 @@ table, td, th {
 }
 td, th {
     padding: 5px;
+    text-align: center;
+}
+td:nth-child(even), th:nth-child(even) {
+    background-color: #eee;
 }
 #message {
     color: #f00;

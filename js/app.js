@@ -3,8 +3,7 @@ $(document).ready(function() {
 
     $('#loader').fadeIn('slow');
 
-    // TODO: fix it to take input starting at 1
-    var minFibNumber = 3,
+    var minFibNumber = 1,
         maxFibNumber = 30;
 
     // print the min and max to the HTML page template areas
@@ -73,8 +72,12 @@ $(document).ready(function() {
     // Generate and print data to screen
     function generateFibs(num, format) {
         // Generate the fibs
-        var forFib = [0, 1],
+        var forFib = [0],
             current;
+
+        if(fibCount > 1) {
+            forFib.push(1);
+        };
 
         for (var i = 1; i  <= fibCount - 2; i ++) {
             current = forFib[i] + forFib[i - 1];

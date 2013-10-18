@@ -38,3 +38,6 @@ footer a, footer a:visited {
 .template {
     color: #eee;
 }
+#loader {
+    display: none;
+}

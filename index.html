@@ -9,23 +9,25 @@
 <body>
     <div id="container">
         <h1>Fibonacci Numbers</h1>
-        <p>Enter a number between <span id="minNumber" class="template">{ loading }</span> and <span id="maxNumber" class="template">{ loading }</span> in the box and choose a format. Then click the button.</p>
+        <div id="loader">
+            <p>Enter a number between <span id="minNumber" class="template">{ loading }</span> and <span id="maxNumber" class="template">{ loading }</span> in the box and choose a format. Then click the button.</p>
 
-        <form>
-            <label for="numValues">Number of values:</label> 
-            <input type="text" name="numValues" id="numberOfValues">
-            <br>
+            <form>
+                <label for="numValues">Number of values:</label> 
+                <input type="text" name="numValues" id="numberOfValues">
+                <br>
 
-            <input type="radio" name="outputFormat" id="radioTable" value="table">
-            <label for="radioTable">Table</label>
-            <input type="radio" name="outputFormat" id="radioConsole" value="console">
-            <label for="radioConsole">String</label>
-            <br>
+                <input type="radio" name="outputFormat" id="radioTable" value="table">
+                <label for="radioTable">Table</label>
+                <input type="radio" name="outputFormat" id="radioConsole" value="console">
+                <label for="radioConsole">String</label>
+                <br>
 
-            <button id="printFibValues">Print Fibonacci Values</button>
-        </form>
-        <div id="message"></div>
-        <div id="outputArea"></div>
+                <button id="printFibValues">Print Fibonacci Values</button>
+            </form>
+            <div id="message"></div>
+            <div id="outputArea"></div>
+        </div>
         <footer>
             Background image &copy; <a href="http://en.wikipedia.org/wiki/File:NautilusCutawayLogarithmicSpiral.jpg">Chris 73</a> under <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en">CC BY-SA 3.0</a> license
         </footer>

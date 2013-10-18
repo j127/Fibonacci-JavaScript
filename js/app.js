@@ -1,6 +1,8 @@
 $(document).ready(function() {
     // TODO: finish removing jQuery
 
+    $('#loader').fadeIn('slow');
+
     // TODO: fix it to take input starting at 1
     var minFibNumber = 3,
         maxFibNumber = 30;

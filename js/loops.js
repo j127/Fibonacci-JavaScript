@@ -1,28 +1,40 @@
 $(document).ready(function() {
+    // TODO: finish removing jQuery
+
+    // TODO: fix it to take input starting at 1
+    var minFibNumber = 3,
+        maxFibNumber = 30;
+
+    // print the min and max to the HTML page template areas
+    min = document.getElementById('minNumber');
+    min.innerHTML = minFibNumber;
+    min.style.color = 'black';
+
+    max = document.getElementById('maxNumber');
+    max.innerHTML = maxFibNumber;
+    max.style.color = 'black';
 
     $('button').on('click', function(e) {
         // Prevent form submission
         e.preventDefault();
 
         // Clear current values
-        $('#message').html('');
-        $('#outputArea').text('');
+        document.getElementById('message').innerHTML = '';
+        document.getElementById('outputArea').innerHTML = '';
 
         // Do it
         getFibOptions();
     });
 
-    // Function to validate numbers
+    // Validate numbers
     // isNaN() by itself won't catch numbers passes as strings like '10' (with quotes)
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
-    // Function to get input from user
+    // Get input from user
     function getFibOptions() {
-        var minNumber = 3,
-            maxNumber = 30,
-            radioButtonsValid = false,
+        var radioButtonsValid = false,
             inputFieldValid = false;
 
         // TODO: fix global variable?
@@ -30,8 +42,8 @@ $(document).ready(function() {
         var format = document.getElementsByName('outputFormat'); // an array
 
         // Validate input field
-        if((!isNumber(fibCount)) || (fibCount < minNumber) || (fibCount > maxNumber)) {
-            $('#message').append('You must enter a number between 3 and 30.<br>');
+        if((!isNumber(fibCount)) || (fibCount < minFibNumber) || (fibCount > maxFibNumber)) {
+            document.getElementById('message').innerHTML += 'You must enter a number between ' + minFibNumber + ' and ' + maxFibNumber + '.<br>';
         } else {
             inputFieldValid = true;
         };
@@ -47,7 +59,7 @@ $(document).ready(function() {
         };
 
         if(radioButtonsValid === false) {
-            $('#message').append('You must choose a format.<br>');
+            document.getElementById('message').innerHTML += 'You must choose a format.<br>';
         };
 
         // Generate the output
@@ -56,7 +68,7 @@ $(document).ready(function() {
         };
     }
 
-    // Function to generate and print data to screen
+    // Generate and print data to screen
     function generateFibs(num, format) {
         // Generate the fibs
         var forFib = [0, 1],
@@ -77,22 +89,22 @@ $(document).ready(function() {
         } else if(format === 'table') {
             fibsToTable(fibArray);
         } else {
-            $('#message').html('There was an error with the formatting options.');
+            document.getElementById('message').innerHTML = 'There was an error with the formatting options.';
         };
     };
 
-    // Function to print to console / screen
+    // Print to console / screen
     function fibsToConsole(fibs) {
 
         // Send output to console
-        console.log('For loop:\t\t' + fibs);
+        console.log('For loop:\t' + fibs);
 
         // Send output to screen
         fibs = fibs.join(', ');
-        $('#outputArea').append('<h2>Your Fibs String:</h2>' + fibs);
+        document.getElementById('outputArea').innerHTML = '<h2>Your Fibs String:</h2>' + fibs;
     };
 
-    // Function to print a table
+    // Print a table
     function fibsToTable(fibs) {
         var fibsLen = fibs.length;
         var tableStart = '<table>';
@@ -102,17 +114,16 @@ $(document).ready(function() {
         // Assemble table header
         tableMiddle += '<tr>';
         for(var i = 0; i < fibsLen; i ++) {
-            tableMiddle += '<th>F' + i + '</th>';
+            counter = i + 1;
+            tableMiddle += '<th>F' + counter + '</th>';
         };
-        tableMiddle += '</tr>';
-
-        tableMiddle += '<tr>';
-        // Assemble table header
+        tableMiddle += '</tr><tr>';
+        // Assemble table body
         for(var i = 0; i < fibsLen; i ++) {
             tableMiddle += '<td>' + fibs[i] + '</td>';
         };
         tableMiddle += '</tr>';
-        $('#outputArea').html('<h2>Your Fibs Table</h2>' + tableStart + tableMiddle + tableEnd);
+        document.getElementById('outputArea').innerHTML = '<h2>Your Fibs Table</h2>' + tableStart + tableMiddle + tableEnd;
     };
 
 });

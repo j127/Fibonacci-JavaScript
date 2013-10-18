@@ -1,7 +1,9 @@
 $(document).ready(function() {
     // TODO: finish removing jQuery
 
-    $('#loader').fadeIn('slow');
+    // Show the content after the page loads
+    var loader = document.getElementById('loader');
+    loader.style.display = 'block';
 
     var minFibNumber = 1,
         maxFibNumber = 30;
